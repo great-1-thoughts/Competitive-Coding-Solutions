@@ -1,0 +1,213 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct node {
+    int data;
+    node* left;
+    node* right;
+};
+
+node* root = NULL;
+
+node* createNode(int num) {
+    node* temp = new node;
+    temp->data = num;
+    temp->left = NULL;
+    temp->right = NULL;
+    return temp;
+}
+
+void insertData(int num) {
+    if(root == NULL) {
+        root = createNode(num);
+    } else {
+        node* temp = createNode(num);
+        node* NODE = root;
+        while(1) {
+            if(num <= NODE->data) {
+                if(NODE->left == NULL) {
+                    NODE->left = temp;
+                    break;
+                } else {
+                    NODE = NODE->left;
+                }
+            } else {
+                if(NODE->right == NULL) {
+                    NODE->right = temp;
+                    break;
+                } else {
+                    NODE = NODE->right;
+                }
+            }
+        }
+    }
+    cout<<"\n\t\t Data inserted successfully\n";
+}
+
+void displayData(node* root) {
+    if(root != NULL) {
+        displayData(root->left);
+        cout<<root->data<<" ";
+        displayData(root->right);
+    }
+}
+
+bool searchData(node* temp,int num) {
+    if(temp == NULL)
+        return false;
+    if(temp->data == num)
+        return true;
+    if(num < temp->data)
+        return searchData(temp->left, num);
+    else
+        return searchData(temp->right, num);
+}
+
+void breadthFirstSearch(node *temp) {
+    if(temp == NULL)
+        cout<<"\n No data present";
+    queue<node*> q;
+    q.push(temp);
+    node *NODE;
+    while(!q.empty()) {
+        NODE = q.front();
+        q.pop();
+        cout<<NODE->data<<" ";
+        if(NODE->left != NULL)
+            q.push(NODE->left);
+        if(NODE->right != NULL)
+            q.push(NODE->right);
+    }
+}
+
+int countNodes(node* temp) {
+    if(temp == NULL)
+        return 0;
+    else
+        return 1+countNodes(temp->left)+countNodes(temp->right);
+}
+
+int heightOfTree(node* temp) {
+    if(temp == NULL)
+        return -1;
+    else {
+        int leftHeight = heightOfTree(temp->left);
+        int rightHeight = heightOfTree(temp->right);
+        return max(leftHeight, rightHeight);
+    }
+}
+
+int countLeafNodes(node* temp) {
+    if(temp->left==NULL && temp->right==NULL)
+        return 1;
+    if(temp == NULL)
+        return 0;
+    else
+        return countLeafNodes(temp->left)+countLeafNodes(temp->right);
+}
+
+void mirrorOfTree(node* temp) {
+    if(temp == NULL)
+        return;
+    else {
+        mirrorOfTree(temp->left);
+        mirrorOfTree(temp->right);
+        node *temp2;
+        temp2 = temp->left;
+        temp->left = temp->right;
+        temp->right = temp2;
+    }
+}
+
+void printSpiral(node *root)
+{
+    stack<node*> s1, s2;
+    if(root == NULL)
+        return;
+    node* temp = root;
+    s1.push(temp);
+    vector<int> v;
+    while(1) {
+        while(!s1.empty()) {
+            temp = s1.top();
+            s1.pop();
+            v.push_back(temp->data);
+            if(temp->left)
+                s2.push(temp->right);
+            if(temp->right)
+                s2.push(temp->left);
+        }
+        while(!s2.empty()) {
+            temp = s2.top();
+            s2.pop();
+            v.push_back(temp->data);
+            if(temp->right)
+                s1.push(temp->left);
+            if(temp->left)
+                s1.push(temp->right);
+        }
+        if(s1.empty() && s2.empty())
+            break;
+    }
+
+    for(int i: v)
+        cout<<i<<" ";
+}
+
+
+int main() {
+    int choice;
+    node* temp = root;
+    while(1) {
+        cout<<"\n\t\t\tMENU\n";
+        cout<<"1. Enter the data\n";
+        cout<<"2. Display the data\n";
+        cout<<"3. Search the data\n";
+        cout<<"4. Level Order traversal of the tree(BFS)\n";
+        cout<<"5. Count the number of nodes \n";
+        cout<<"6. Height of the tree \n";
+        cout<<"7. count leaf nodes of the tree \n";
+        cout<<"8. Mirror of a tree\n";
+        cout<<"9. Spiral Order Tree Traversal";
+        cout<<"\n Enter your choice : ";
+        cin>>choice;
+        if(choice == 1) {
+            int num;
+            cout<<"\n Enter the number you want to insert : ";
+            cin>>num;
+            insertData(num);
+        } else if(choice == 2) {
+            displayData(root);
+            cout<<"\n\n";
+        } else if(choice == 3) {
+            int num;
+            cout<<"\n Enter the number to be searched : ";
+            cin>>num;
+
+            bool found = searchData(temp, num);
+            if(found)
+                cout<<"\n Data found";
+            else
+                cout<<"\n Data not found";
+        } else if(choice == 4) {
+            temp = root;
+            breadthFirstSearch(temp);
+        } else if(choice == 5) {
+            temp = root;
+            cout<<"\nThe number of nodes are : "<<countNodes(temp);
+        } else if(choice == 6) {
+            temp = root;
+            cout<<"\n The height of the tree : "<<heightOfTree(temp);
+        } else if(choice == 7) {
+            temp = root;
+            cout<<"\n The number of leaf nodes are : "<<countLeafNodes(temp);
+        } else if(choice == 8) {
+            temp = root;
+            mirrorOfTree(temp);
+        } else if(choice == 9) {
+            printSpiral(root);
+        } else
+            break;
+    }
+return 0;
+}
