@@ -1,0 +1,379 @@
+//Project in C++ for RAILWAY RESERVATION SYSTEM........
+/*Project developed by:--
+   ADESH AND JEETESH----XIth Science........
+   */
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+struct RAILWAY_SYSTEM
+  {
+long Train_no;
+int Nosr,cans;
+char Bopt[30],Dept[30],Train_name[50];
+float FARE,Dist;
+
+  }RS;
+void ADMIN();
+void VIEW();
+void RESERVE();
+void FARE_ENQ();
+void RAIL_WEB();
+void CANCEL();
+void E_DETAILS();
+void SHOW_DETAILS();
+void EXIT();
+
+main()
+{ RS.cans=0;
+RS.FARE=RS.Dist*3.5;
+system("cls");
+ADMIN();
+VIEW();
+RESERVE();
+FARE_ENQ();
+RAIL_WEB();
+CANCEL();
+E_DETAILS();
+SHOW_DETAILS();
+EXIT();
+return 0;
+}
+
+void ADMIN()
+{  char se;
+cout<<"\n===========================";
+cout<<"\n~~~~~~~~ADMIN MODE~~~~~~~~~~";
+cout<<"\n===========================";
+cout<<"\nEnter the administrator password--\t";
+cin>>se;
+if(se=='A')
+{cout<<"Access Granted";
+ E_DETAILS();
+}
+else
+{cout<<"INVALID PASSWORD....Enter your password again";
+  ADMIN();
+}
+
+}
+
+void E_DETAILS()
+{
+char ch;
+cout<<"\n\n\n======================================";
+cout<<"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+cout<<"\n^^^^^WELCOME TO RAILWAY RESERVATION MENU^^^^^";
+cout<<"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+cout<<"\n=============MAIN MENU===============";
+cout<<"\n\nYour selection Menu";
+cout<<"\n1.View all trains";
+cout<<"\n2.Reserve a ticket";
+cout<<"\n3.Fare enquiry";
+cout<<"\n4.Other railway websites";
+cout<<"\n\nEnter your selection--\t";
+cin>>ch;
+switch(ch)
+{case'1':
+   {
+	VIEW();
+	break;
+    }
+case'2':
+   {
+	RESERVE();
+	break;
+    }
+case'3':
+   {
+	FARE_ENQ();
+	break;
+    }
+case'4':
+   {
+	RAIL_WEB();
+	break;
+    }
+
+default:
+    {
+cout<<"\nYour selection is wrong......TRY AGAIN";
+    E_DETAILS();
+     }
+}
+
+}
+
+void VIEW()
+{char ADESH;
+cout<<"\n\n\n=^^^=TRAIN DETAILS ARE GIVEN BELOW=^^^=";
+cout<<"\n=======================================================================================================";
+cout<<"\n||  Train number	      ||               Train Name                      ||            Distance(Km)";
+cout<<"\n------------------------------------------------------------------------------------------------------";
+cout<<"\n||  10214                ||       Mumbai-Delhi Rajdhani Express           ||              2500      ";
+cout<<"\n------------------------------------------------------------------------------------------------------";
+cout<<"\n||  10400	              ||       Bandra-Bhopal Shatabdi Express          ||              1500      ";
+cout<<"\n------------------------------------------------------------------------------------------------------";
+cout<<"\n||  11119                ||       Mumbai-Pune Intercity Express           ||               200        ";
+cout<<"\n------------------------------------------------------------------------------------------------------";
+cout<<"\n||  22107                ||       Delhi-Patna Rajdhani Express            ||              2000      ";
+cout<<"\n------------------------------------------------------------------------------------------------------";
+cout<<"\n||  12107                ||       Mumbai-Ajmer Garib Rath Express         ||              2000      ";
+cout<<"\n=======================================================================================================";
+cout<<"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+cout<<"\n=======================================================================================================";
+cout<<"\n\nYour selection menu";
+cout<<"\n1.Reserve a ticket";
+cout<<"\n2.Go back to main menu";
+cout<<"\n3.Go back to Admin mode";
+cout<<"\n4.Exit";
+cout<<"\n\nEnter your selection--";
+cin>>ADESH;
+switch(ADESH)
+{case'1':
+   {
+	RESERVE();
+	break;
+    }
+  case'2':
+   {
+             E_DETAILS();
+	break;
+   }
+case'3':
+   {
+             ADMIN();
+	break;
+   }
+case'4':
+   {
+             EXIT();
+	break;
+   }
+  default:
+   {
+     cout<<"\nPlease enter a correct selection";
+    VIEW();
+ }
+}
+
+}
+
+void RESERVE()
+{  char JEETESH;
+cout<<"\n=============================";
+cout<<"\n~~~~WELCOME TO RESERVATION MENU~~~~";
+cout<<"\n=============================";
+cout<<"\n\nEnter the details as follows";
+cout<<"\nEnter the train number";
+cin>>RS.Train_no;
+if((RS.Train_no==10214)||(RS.Train_no==10400)||(RS.Train_no==11119)||(RS.Train_no==22107)||(RS.Train_no==12107))
+{
+   if(RS.Train_no==10214)
+    {
+     RS.Dist=2500;
+     }
+   else if(RS.Train_no==10400)
+   {
+    RS.Dist=1500;
+    }
+   else if(RS.Train_no==11119)
+   {
+    RS.Dist=200;
+    }
+   else if(RS.Train_no==22107)
+   {
+    RS.Dist=2000;
+    }
+   else if(RS.Train_no==12107)
+   {
+    RS.Dist=2000;
+    }
+   else
+   {cout<<"Enter a valid train number";
+    RESERVE();}
+}
+else
+{cout<<"\nPLEASE GO BACK TO THE MAIN MENU";
+   E_DETAILS();
+}
+cout<<"\nBoarding Point";
+cin>>RS.Bopt;
+cout<<"\nDestination Point";
+cin>>RS.Dept;
+cout<<"\nEnter the number of seats to be reserved";
+cin>>RS.Nosr;
+cout<<"\nThe distance of the journey(in Kilometres)--"<<RS.Dist;
+cout<<"\n\nYour Selection Menu";
+cout<<"\n1.Show Details";
+cout<<"\n2.Cancel Ticket";
+cout<<"\n3.Main Menu";
+cout<<"\n4.Exit";
+cout<<"\nEnter your Selection--";
+cin>>JEETESH;
+switch(JEETESH)
+{case'1':
+   {
+	SHOW_DETAILS();
+	break;
+    }
+  case'2':
+   {
+             CANCEL();
+	break;
+   }
+case'3':
+   {
+             E_DETAILS();
+	break;
+   }
+case'4':
+   {
+             EXIT();
+	break;
+   }
+default:
+{  cout<<"\nPlease enter a correct selection";
+     E_DETAILS();
+ }
+}
+cout<<"\n=========================";
+cout<<"\n~~~~......END OF DETAILS......~~~~";
+}
+
+void FARE_ENQ()
+{ char JE;
+cout<<"\n===~~~FARE ENQUIRY~~~===";
+cout<<"\nYou will be charged Rs.3.5 per kilometre";
+cout<<"\nEnter the distance of the journey";
+cin>>RS.Dist;
+if((RS.Dist>0)&&(RS.Dist<=3000))
+{
+cout<<"\nTotal fare for the journey will be"<<RS.FARE;
+}
+else
+{
+E_DETAILS;
+}
+cout<<"\n=========================";
+cout<<"\n~~~~~End of Fare Enquiry~~~~~";
+cout<<"\n=========================";
+cout<<"\n\nYour selection menu";
+cout<<"\n1.Reservation Summary";
+cout<<"\n2.Go back to main menu";
+cout<<"\n3.Go back to Admin mode";
+cout<<"\n4.Exit";
+cout<<"\n\nEnter your selection";
+cin>>JE;
+switch(JE)
+{case'1':
+   {
+	SHOW_DETAILS();
+	break;
+    }
+  case'2':
+   {
+             E_DETAILS();
+	break;
+   }
+case'3':
+   {
+             ADMIN();
+	break;
+   }
+case'4':
+   {
+             EXIT();
+	break;
+   }
+  default:
+   {
+     cout<<"\nPlease enter a correct selection";
+    VIEW();
+ }
+}
+
+}
+
+void CANCEL()
+{char EF;
+cout<<"======================================";
+cout<<"\n~~~~WELCOME TO TICKET CANCELLATION MENU~~~~";
+cout<<"\n=====================================";
+cout<<"\nEnter the number of seats to be cancelled:--";
+cin>>RS.cans;
+if(RS.Nosr>=RS.cans)
+{
+RS.Nosr=RS.Nosr-RS.cans;
+cout<<"\nSeats reserved after cancellation are:--"<<RS.Nosr;
+}
+else
+{cout<<"Invalid Input....PLEASE ENTER AGAIN";
+CANCEL();
+}
+cout<<"\n\nYour selection menu";
+cout<<"\n1.Reservation Summary";
+cout<<"\n2.Go back to main menu";
+cout<<"\n3.Go back to Admin mode";
+cout<<"\n4.Exit";
+cout<<"\n\nEnter your selection";
+cin>>EF;
+switch(EF)
+{case'1':
+   {
+	SHOW_DETAILS();
+	break;
+    }
+  case'2':
+   {
+             E_DETAILS();
+	break;
+   }
+case'3':
+   {
+             ADMIN();
+	break;
+   }
+case'4':
+   {
+             EXIT();
+	break;
+   }
+  default:
+   {
+     cout<<"Please enter a correct selection";
+    E_DETAILS();
+ }
+}
+
+}
+
+void SHOW_DETAILS()
+{
+cout<<"\n==Your====================";
+cout<<"\n=====Reservation============";
+cout<<"\n============Summary=======";
+cout<<"\nThe train number is--"<<RS.Train_no;
+cout<<"\nBoarding Point is--"<<RS.Bopt;
+cout<<"\nDestination Point--"<<RS.Dept;
+cout<<"\nThe number of seats reserved are--"<<RS.Nosr;
+cout<<"\nThe distance of the journey is--"<<RS.Dist;
+
+}
+void RAIL_WEB()
+{
+cout<<"\n==========================";
+cout<<"\n^^^^OTHER RAILWAY WEBSITES^^^^";
+cout<<"\n==========================";
+cout<<"\n\nwww.indianrail.gov.in";
+cout<<"\nwww.irctc.co.in";
+cout<<"\nwww.erail.in";
+cout<<"\nwww.indianrailinfo.com";
+
+}
+void EXIT()
+{
+cout<<"\n==========================";
+cout<<"\nTHANK YOU.............";
+cout<<"\n==========================";
+}
+
