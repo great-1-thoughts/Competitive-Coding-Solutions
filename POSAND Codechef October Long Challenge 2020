@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+//https://www.geeksforgeeks.org/program-to-find-whether-a-no-is-power-of-two/
+bool Two(int n)
+{
+   if(n==0)
+   return false;
+ 
+   return (ceil(log2(n)) == floor(log2(n)));
+}
+
+int main() {
+	// your code goes here
+	int a[100001],i=4;
+	a[1]=2;
+	a[2]=3;
+	a[3]=1;
+	while(i<100001)
+	{
+	    if(Two(i))
+	    {
+	        a[i+1]=i;
+	        a[i]=i+1;
+	        i++;
+	    }else a[i]=i;
+	    i++;
+	}
+	int t;cin>>t;
+	while(t--)
+	{
+	    int n;
+	    cin>>n;
+	    if(n==1) {cout<<1<<"\n";continue;}
+	    if(Two(n))
+	    {
+	        cout<<"-1\n";
+	        continue;
+	    }
+	    for(int i=1;i<n+1;i++)
+	    {
+	        cout<<a[i]<<" ";
+	    }
+	    cout<<"\n";
+	}
+	return 0;
+}
